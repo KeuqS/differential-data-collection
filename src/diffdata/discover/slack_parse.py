@@ -50,7 +50,11 @@ META = {
 # Seconds, a dot, then a sequence number. Ten digits of seconds last until the year 2286;
 # anything else would crash the build when it's turned into a date.
 TS = re.compile(r"[0-9]{1,10}\.[0-9]+")
-FILE = re.compile(r"(?P<name>[^,]+?) \(ID: (?P<id>F[A-Z0-9]+), (?P<type>[^,()]+), [^()]+\)")
+# A file starts at the line's start or after "), ", where the one before it ends, so its
+# name can hold commas: "notes, final.txt (ID: F..., type, size), b.png (ID: F..., ...)".
+FILE = re.compile(
+    r"(?:^|(?<=\), ))(?P<name>.+?) \(ID: (?P<id>F[A-Z0-9]+), (?P<type>[^,()]+), [^()]+\)"
+)
 REACTION = re.compile(r"(?P<name>[^\s,()]+) \((?P<count>\d+)\)")
 SLACK_MARKUP = re.compile(r"<([^<>\n]+)>")
 CURSOR = re.compile(r"cursor:?\s*`([^`]+)`")  # "...use cursor: `bmV4dF90czox...`"
