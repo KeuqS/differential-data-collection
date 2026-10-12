@@ -189,7 +189,7 @@ def parse_files(value: str) -> list[dict]:
     if not value:
         return []
     files = [{"id": f["id"], "name": f["name"], "type": f["type"]} for f in FILE.finditer(value)]
-    # Only single files have been seen so far. Keep a line we can't split rather than lose it.
+    # Messages may list multiple files. Keep a line we can't split rather than lose it.
     return files or [{"id": "", "name": value, "type": ""}]
 
 

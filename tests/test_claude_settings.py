@@ -1,4 +1,5 @@
-"""Read-only, enforced: the repo's Claude settings deny every Slack write tool (DIS-1).
+"""Read-only, enforced: the repo's Claude settings deny every Slack write tool (DIS-1),
+and review sessions stay file-read-only (ENG-5).
 
 `.claude/settings.json` holds the deny list, which Claude Code applies in every permission
 mode. A command's `allowed-tools` only pre-approves tools; it doesn't restrict anything,
@@ -38,9 +39,15 @@ FUTURE_SLACK_WRITE_TOOLS = [
     "slack_edit_message",
     "slack_post_message",
     "slack_pin_message",
+    "slack_unpin_message",
     "slack_invite_user",
     "slack_join_channel",
     "slack_archive_channel",
+    "slack_unarchive_channel",
+    "slack_leave_channel",
+    "slack_kick_user",
+    "slack_share_message",
+    "slack_reply_message",
     "slack_set_channel_topic",
     "slack_mark_read",
     "slack_rename_channel",
